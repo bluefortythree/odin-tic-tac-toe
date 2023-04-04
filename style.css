@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#gameboard {
+    display: flex;
+    flex-wrap: wrap;
+    height: 600px;
+    width: 600px;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+    text-align: center;
+    overflow: hidden;
+    font-size: 60px;
+    font-weight: 600;
+    outline: 1px solid black;
+    height: 33.3333%;
+    width: 33.3333%;
+}
