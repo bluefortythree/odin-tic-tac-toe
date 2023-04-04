@@ -7,15 +7,32 @@ let gameboard = {
                 if(marker.innerText === '' && turns % 2 === 0 && turns < 9) {
                     marker.innerText = 'X';
                     turns ++;
-                    setTimeout(this.checkWinner, 300)
-                } else if(marker.innerText === '' && turns % 2 != 0 && turns < 9) {
+                    this.checkWinner();
+                    if(this.checkWinner()) {
+                        setTimeout("alert('game over!')", 200);
+                        turns = 10;
+                    }
+                } else if(marker.innerText === '' && turns % 2 !== 0 && turns < 9) {
                     marker.innerText = 'O';
                     turns ++;
-                    setTimeout(this.checkWinner, 300)
-                } 
+                    this.checkWinner();
+                    if(this.checkWinner()) {
+                        setTimeout("alert('game over!')", 200);
+                        turns = 10;
+                    }
+                }
                 return turns;
             })
         }
+
+        let reset = document.getElementById('reset');
+        reset.addEventListener('click', () => {
+            turns = 0;
+            for(i = 0; i < 9; i++) {
+                let marker = document.getElementsByClassName('square')[i];
+                marker.innerText = ''
+            }
+        })
     },
 
     checkWinner: function() {
@@ -31,14 +48,20 @@ let gameboard = {
 
         if(one === 'X' && two === 'X' && three === 'X' || four === 'X' && five === 'X' && six === 'X' || seven === 'X' && eight === 'X' && nine === 'X' 
         || one === 'X' && four === 'X' && seven ==='X' || two === 'X' && five === 'X' && eight === 'X' || three === 'X' && six === 'X' && nine === 'X' 
-        || one === 'X' && five === 'X' && nine === 'X' || three === 'X' && five === 'X' && seven === 'X' || one === 'O' && two === 'O' && three === 'O' 
+        || one === 'X' && five === 'X' && nine === 'X' || three === 'X' && five === 'X' && seven === 'X') {
+            return true;
+        } else if (one !== '' && two !== '' && three !== '' && four !== '' && five !== '' && six !== '' && seven !== '' && eight !== '' && nine !== '') {
+            return true;
+        } else if(one === 'O' && two === 'O' && three === 'O' 
         || four === 'O' && five === 'O' && six === 'O' || seven === 'O' && eight === 'O' && nine === 'O' 
         || one === 'O' && four === 'O' && seven ==='O' || two === 'O' && five === 'O' && eight === 'O' || three === 'O' && six === 'O' && nine === 'O' 
         || one === 'O' && five === 'O' && nine === 'O' || three === 'O' && five === 'O' && seven === 'O') {
-            alert('game over!')
+            return true;
+        } else {
+            return false;
         }
+        },
     }
-};
 
 gameboard.placeMarker();
-
+gameboard.checkWinner();
