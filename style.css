@@ -33,6 +33,13 @@ body {
     display: none;
 }
 
+#right,
+#left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 fieldset {
     display: flex;
     flex-direction: column;

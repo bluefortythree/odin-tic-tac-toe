@@ -47,30 +47,72 @@ players.playGame();
 let gameboard = {
     placeMarker: function() {
         let turns = 0;
+        let playerOneScore = 0;
+        let playerTwoScore = 0;
+        let one = document.getElementById('p1-score');
+        one.innerText = playerOneScore;
+        let two = document.getElementById('p2-score');
+        two.innerText = playerTwoScore;
         for(i = 0; i < 9; i++) {
             let marker = document.getElementsByClassName('square')[i];
             marker.addEventListener('click', () => {
-                if(marker.innerText === '' && turns % 2 === 0 && turns < 9) {
+                if(marker.innerText === '' && turns % 2 === 0 && turns < 8) {
                     marker.innerText = 'X';
                     turns ++;
                     this.checkWinner();
                     if(this.checkWinner()) {
                         setTimeout("alert('game over!')", 200);
                         turns = 10;
+                        playerOneScore ++;
+                        let one = document.getElementById('p1-score');
+                        one.innerText = playerOneScore;
+                        let two = document.getElementById('p2-score');
+                        two.innerText = playerTwoScore;
+                        console.log('P1:' + playerOneScore);
                     }
-                } else if(marker.innerText === '' && turns % 2 !== 0 && turns < 9) {
+                } else if(marker.innerText === '' && turns % 2 !== 0 && turns < 8) {
                     marker.innerText = 'O';
                     turns ++;
                     this.checkWinner();
                     if(this.checkWinner()) {
                         setTimeout("alert('game over!')", 200);
                         turns = 10;
+                        playerTwoScore ++;
+                        let one = document.getElementById('p1-score');
+                        one.innerText = playerOneScore;
+                        let two = document.getElementById('p2-score');
+                        two.innerText = playerTwoScore;
+                        console.log('P2:' + playerTwoScore);
+                    }
+                } else if(marker.innerText === '' && turns >= 8) {
+                    marker.innerText = 'X';
+                    turns ++;
+                    this.checkWinner();
+                    if(this.checkWinner()) {
+                        setTimeout("alert('game over!')", 200);
+                        turns = 10;
+                        playerOneScore ++;
+                        let one = document.getElementById('p1-score');
+                        one.innerText = playerOneScore;
+                        let two = document.getElementById('p2-score');
+                        two.innerText = playerTwoScore;
+                        console.log('P1:' + playerOneScore);
+                    } else {
+                        setTimeout("alert('tie!')", 200);
+                        turns = 10;
                     }
                 }
-                return turns;
+                return {
+                    turns: turns,
+                    playerOneScore: playerOneScore,
+                    playerTwoScore: playerTwoScore,
+                }
             })
+            
         }
 
+
+        
         let reset = document.getElementById('reset');
         reset.addEventListener('click', () => {
             turns = 0;
@@ -95,8 +137,6 @@ let gameboard = {
         if(one === 'X' && two === 'X' && three === 'X' || four === 'X' && five === 'X' && six === 'X' || seven === 'X' && eight === 'X' && nine === 'X' 
         || one === 'X' && four === 'X' && seven ==='X' || two === 'X' && five === 'X' && eight === 'X' || three === 'X' && six === 'X' && nine === 'X' 
         || one === 'X' && five === 'X' && nine === 'X' || three === 'X' && five === 'X' && seven === 'X') {
-            return true;
-        } else if (one !== '' && two !== '' && three !== '' && four !== '' && five !== '' && six !== '' && seven !== '' && eight !== '' && nine !== '') {
             return true;
         } else if(one === 'O' && two === 'O' && three === 'O' 
         || four === 'O' && five === 'O' && six === 'O' || seven === 'O' && eight === 'O' && nine === 'O' 
