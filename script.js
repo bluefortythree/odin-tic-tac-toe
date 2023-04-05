@@ -1,3 +1,49 @@
+let welcome = {
+    modeSelect: function () {
+        let player = document.getElementById('player');
+        player.addEventListener('click', () => {
+            let welcome = document.getElementById('welcome');
+            welcome.style.display = "none";
+            let names = document.getElementById('names');
+            names.style.display = "flex";
+        })
+        let computer = document.getElementById('computer');
+        computer.addEventListener('click', () => {
+            let welcome = document.getElementById('welcome');
+            welcome.style.display = "none";
+            let game = document.getElementById('game');
+            game.style.display = "flex";
+            let gameboard = document.getElementById('gameboard');
+            gameboard.style.display = "flex";
+        })
+    }
+}
+
+welcome.modeSelect();
+
+let players = {
+    playGame: function () {
+        let form = document.getElementById('names');
+        let names = document.getElementById('names');
+        let game = document.getElementById('game');
+        let gameboard = document.getElementById('gameboard');
+        let playerOne = document.getElementById('player-one');
+        let playerTwo = document.getElementById('player-two');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let p1 = document.getElementById('p1').value;
+            let p2 = document.getElementById('p2').value;
+            names.style.display = "none";
+            gameboard.style.display = "flex";
+            game.style.display = "flex";
+            playerOne.innerText = p1;
+            playerTwo.innerText = p2;
+        }
+    )}
+}
+
+players.playGame();
+
 let gameboard = {
     placeMarker: function() {
         let turns = 0;
@@ -64,4 +110,4 @@ let gameboard = {
     }
 
 gameboard.placeMarker();
-gameboard.checkWinner();
+

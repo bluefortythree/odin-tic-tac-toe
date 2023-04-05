@@ -8,11 +8,58 @@ body {
     padding: 0;
 }
 
-#gameboard {
+#welcome {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+
+#title {
+    font-size: 150px;
+    font-weight: 600;
+}
+
+#player {
+    font-size: 50px;
+    padding: 35px;
+    margin-top: 200px;
+    margin-bottom: 100px;
+    border-radius: 50px;
+}
+
+#names {
+    display: none;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+#computer {
+    font-size: 50px;
+    padding: 35px;
+    border-radius: 50px;
+}
+
+#game {
+    display: none;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+#gameboard {
+    display: none;
+    justify-content: center;
     flex-wrap: wrap;
     height: 600px;
     width: 600px;
+}
+
+#reset {
+    margin-top: 20px;
 }
 
 .square {
