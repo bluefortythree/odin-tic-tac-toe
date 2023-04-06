@@ -45,11 +45,6 @@ fieldset {
     flex-direction: column;
 }
 
-#computer {
-    font-size: 50px;
-    padding: 35px;
-    border-radius: 50px;
-}
 
 #game {
     display: none;

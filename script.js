@@ -7,15 +7,15 @@ let welcome = {
             let names = document.getElementById('names');
             names.style.display = "flex";
         })
-        let computer = document.getElementById('computer');
-        computer.addEventListener('click', () => {
-            let welcome = document.getElementById('welcome');
-            welcome.style.display = "none";
-            let game = document.getElementById('game');
-            game.style.display = "flex";
-            let gameboard = document.getElementById('gameboard');
-            gameboard.style.display = "flex";
-        })
+        // let computer = document.getElementById('computer');
+        // computer.addEventListener('click', () => {
+        //     let welcome = document.getElementById('welcome');
+        //     welcome.style.display = "none";
+        //     let game = document.getElementById('game');
+        //     game.style.display = "flex";
+        //     let gameboard = document.getElementById('gameboard');
+        //     gameboard.style.display = "flex";
+        // })
     }
 }
 
@@ -24,6 +24,7 @@ welcome.modeSelect();
 
 let players = {
     playGame: function () {
+        let welcome = document.getElementById('welcome');
         let form = document.getElementById('names');
         let names = document.getElementById('names');
         let game = document.getElementById('game');
@@ -34,6 +35,7 @@ let players = {
             e.preventDefault();
             let p1 = document.getElementById('p1').value;
             let p2 = document.getElementById('p2').value;
+            welcome.style.display = "none";
             names.style.display = "none";
             gameboard.style.display = "flex";
             game.style.display = "flex";
