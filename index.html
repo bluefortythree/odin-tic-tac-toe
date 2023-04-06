@@ -18,9 +18,9 @@
         <form action="" id="player-names">
             <fieldset>
                 <label for="p1">Player One's Name:</label>
-                <input id="p1" type="text" maxlength=50 required>
+                <input id="p1" type="text" maxlength=20 required>
                 <label for="p2">Player Two's Name:</label>
-                <input id="p2" type="text" maxlength=50 required>
+                <input id="p2" type="text" maxlength=20 required>
                 <button id="submit" form="player-names">Play</button>
             </fieldset>
         </form>
@@ -40,7 +40,11 @@
             <div id="seven" class="square"></div>
             <div id="eight" class="square"></div>
             <div id="nine" class="square"></div>
-            <button id="reset">Play Again</button>
+            <div id="buttons-container">
+                <button id="reset">Play Again</button>
+                <button id="reset-score">Reset Score</button>
+                <button id="home">Home</button>
+            </div>
         </div>
         <div id="right">
             <div id="player-two"></div>

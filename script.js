@@ -21,6 +21,7 @@ let welcome = {
 
 welcome.modeSelect();
 
+
 let players = {
     playGame: function () {
         let form = document.getElementById('names');
@@ -36,8 +37,9 @@ let players = {
             names.style.display = "none";
             gameboard.style.display = "flex";
             game.style.display = "flex";
-            playerOne.innerText = p1;
-            playerTwo.innerText = p2;
+            playerOne.innerText = p1 + ' (X)';
+            playerTwo.innerText = p2 + ' (O)';
+            document.forms['player-names'].reset();
         }
     )}
 }
@@ -50,9 +52,38 @@ let gameboard = {
         let playerOneScore = 0;
         let playerTwoScore = 0;
         let one = document.getElementById('p1-score');
-        one.innerText = playerOneScore;
+        one.innerText = 'Score: ' + playerOneScore;
         let two = document.getElementById('p2-score');
-        two.innerText = playerTwoScore;
+        two.innerText = 'Score: ' + playerTwoScore;
+
+        let home = document.getElementById('home');
+        home.addEventListener('click', () => {
+            let welcome = document.getElementById('welcome');
+            let game = document.getElementById('game');
+            if(confirm("Your data will be lost. Are you sure you want to go to home?")) {
+                turns = 0;
+                for(i = 0; i < 9; i++) {
+                    let marker = document.getElementsByClassName('square')[i];
+                    marker.innerText = '';
+                };
+            welcome.style.display = 'flex';
+            game.style.display = 'none';
+            playerOneScore = 0;
+            playerTwoScore = 0;
+            one.innerText = 'Score: ' + playerOneScore;
+            two.innerText = 'Score: ' + playerTwoScore;
+            }
+        })
+
+        let resetScore = document.getElementById('reset-score');
+        resetScore.addEventListener('click', () => {
+            if(confirm("Are you sure you want to reset scores?")) {
+                playerOneScore = 0;
+                one.innerText = 'Score: ' + playerOneScore;
+                playerTwoScore = 0;
+                two.innerText = 'Score: ' + playerTwoScore;
+        }})
+
         for(i = 0; i < 9; i++) {
             let marker = document.getElementsByClassName('square')[i];
             marker.addEventListener('click', () => {
@@ -64,10 +95,8 @@ let gameboard = {
                         setTimeout("alert('game over!')", 200);
                         turns = 10;
                         playerOneScore ++;
-                        let one = document.getElementById('p1-score');
-                        one.innerText = playerOneScore;
-                        let two = document.getElementById('p2-score');
-                        two.innerText = playerTwoScore;
+                        one.innerText = 'Score: ' + playerOneScore;
+                        two.innerText = 'Score: ' + playerTwoScore;
                         console.log('P1:' + playerOneScore);
                     }
                 } else if(marker.innerText === '' && turns % 2 !== 0 && turns < 8) {
@@ -78,13 +107,11 @@ let gameboard = {
                         setTimeout("alert('game over!')", 200);
                         turns = 10;
                         playerTwoScore ++;
-                        let one = document.getElementById('p1-score');
-                        one.innerText = playerOneScore;
-                        let two = document.getElementById('p2-score');
-                        two.innerText = playerTwoScore;
+                        one.innerText = 'Score: ' + playerOneScore;
+                        two.innerText = 'Score: ' + playerTwoScore;
                         console.log('P2:' + playerTwoScore);
                     }
-                } else if(marker.innerText === '' && turns >= 8) {
+                } else if(marker.innerText === '' && turns >= 8 && turns < 10) {
                     marker.innerText = 'X';
                     turns ++;
                     this.checkWinner();
@@ -92,10 +119,8 @@ let gameboard = {
                         setTimeout("alert('game over!')", 200);
                         turns = 10;
                         playerOneScore ++;
-                        let one = document.getElementById('p1-score');
-                        one.innerText = playerOneScore;
-                        let two = document.getElementById('p2-score');
-                        two.innerText = playerTwoScore;
+                        one.innerText = 'Score: ' + playerOneScore;
+                        two.innerText = 'Score: ' + playerTwoScore;
                         console.log('P1:' + playerOneScore);
                     } else {
                         setTimeout("alert('tie!')", 200);
@@ -111,15 +136,46 @@ let gameboard = {
             
         }
 
-
+        window.onbeforeunload = function(event) {
+            let game = document.getElementById('game').style.display;
+            if(game === "flex") {
+                event.returnValue = "";
+            }
+          };
         
         let reset = document.getElementById('reset');
         reset.addEventListener('click', () => {
-            turns = 0;
-            for(i = 0; i < 9; i++) {
-                let marker = document.getElementsByClassName('square')[i];
-                marker.innerText = ''
+            let one = document.getElementById('one').innerText;
+            let two = document.getElementById('two').innerText;
+            let three = document.getElementById('three').innerText;
+            let four = document.getElementById('four').innerText;
+            let five = document.getElementById('five').innerText;
+            let six = document.getElementById('six').innerText;
+            let seven = document.getElementById('seven').innerText;
+            let eight = document.getElementById('eight').innerText;
+            let nine = document.getElementById('nine').innerText;
+            if(this.checkWinner()) {
+                turns = 0;
+                for(i = 0; i < 9; i++) {
+                    let marker = document.getElementsByClassName('square')[i];
+                    marker.innerText = ''
+                }
+            } else if (one !== '' && two !== '' && three !== '' && four !== '' && five !== '' && six !== '' && seven !== '' && eight !== '' && nine !== '') {
+                turns = 0;
+                for(i = 0; i < 9; i++) {
+                    let marker = document.getElementsByClassName('square')[i];
+                    marker.innerText = ''
+                }
+            } else {
+                if(confirm('The game is not yet over. Are you sure you want to start a new one?')) {
+                    turns = 0;
+                    for(i = 0; i < 9; i++) {
+                        let marker = document.getElementsByClassName('square')[i];
+                        marker.innerText = ''
+                    }
+                }
             }
+            
         })
     },
 
@@ -143,11 +199,39 @@ let gameboard = {
         || one === 'O' && four === 'O' && seven ==='O' || two === 'O' && five === 'O' && eight === 'O' || three === 'O' && six === 'O' && nine === 'O' 
         || one === 'O' && five === 'O' && nine === 'O' || three === 'O' && five === 'O' && seven === 'O') {
             return true;
+        } else if(one !== '' && two !== '' && three !== '' && four !== '' && five !== '' && six !== '' && seven !== '' && eight !== '' && nine !== '') {
+            return false;
         } else {
             return false;
         }
         },
+    
+    // home: function() {
+        // let home = document.getElementById('home');
+        // let welcome = document.getElementById('welcome');
+        // let game = document.getElementById('game');
+        // let playerOne = document.getElementById('player-one');
+        // let playerTwo = document.getElementById('player-two');
+        // let playerOneScore = document.getElementById('p1-score');
+        // let playerTwoScore = document.getElementById('p2-score');
+    //     home.addEventListener('click', () => {
+    //         if (confirm("Your data will be lost. Are you sure you want to return home?")) {
+    //             for(i = 0; i < 9; i++) {
+    //                 let marker = document.getElementsByClassName('square')[i];
+    //                 marker.innerText = ''};
+    //             welcome.style.display = 'flex';
+    //             game.style.display = 'none';
+    //             playerOne.innerText = '';
+    //             playerTwo.innerText = '';
+    //             playerOneScore.innerText = 'Score: 0';
+    //             playerTwoScore.innerText = 'Score: 0';
+    //         }
+    //     }
+    //     )
+    // },
+
     }
 
 gameboard.placeMarker();
+
 

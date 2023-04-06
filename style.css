@@ -65,7 +65,19 @@ fieldset {
     width: 600px;
 }
 
+#buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #reset {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#home {
     margin-top: 20px;
 }
 
@@ -81,4 +93,15 @@ fieldset {
     outline: 1px solid black;
     height: 33.3333%;
     width: 33.3333%;
+}
+
+#player-one,
+#player-two {
+    font-size: 50px;
+}
+
+#p1-score,
+#p2-score {
+    font-size: 50px;
+    margin-top: 50px;
 }
